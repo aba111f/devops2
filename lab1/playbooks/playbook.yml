@@ -1,0 +1,7 @@
+---
+- name: docker, postgres and keyclock
+  hosts: SERVERS_LAB
+  become: yes
+  tasks:
+   - name: ping servers
+     ping:
