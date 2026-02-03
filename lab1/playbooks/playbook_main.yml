@@ -2,6 +2,8 @@
 - name: Docker, postgres and keycloak
   hosts: OTHERS
   become: yes
+  vars_files:
+    - ../secrets.yml
   tasks:
    - name: Installation of System packages and Docker SDK
      apt: 
@@ -35,9 +37,9 @@
        image: ubuntu/postgres:12-20.04_beta
        network_mode: keycloak_net
        env: 
-         POSTGRES_DB: "keycloak"
-         POSTGRES_USER: "keycloak"
-         POSTGRES_PASSWORD: "1234"
+         POSTGRES_DB: "{{ POSTGRES_DB }}"
+         POSTGRES_USER: "{{ POSTGRES_USER }}"
+         POSTGRES_PASSWORD: "{{ POSTGRES_PASSWORD }}"
        restart_policy: always
 
 
@@ -48,14 +50,14 @@
        network_mode: keycloak_net
        command: start-dev
        ports:
-         - "8080:8080"
+         - "{{ ports }}"
        env:
-         KC_DB: "postgres"
-         KC_DB_URL: "jdbc:postgresql://postgres_db:5432/keycloak"
-         KC_DB_USERNAME: "keycloak"
-         KC_DB_PASSWORD: "1234"
-         KEYCLOAK_ADMIN: "admin"
-         KEYCLOAK_ADMIN_PASSWORD: "1234"
+         KC_DB: "{{ KC_DB }}"
+         KC_DB_URL: "{{ KC_DB_URL }}"
+         KC_DB_USERNAME: "{{ KC_DB_USERNAME }}"
+         KC_DB_PASSWORD: "{{ KC_DB_PASSWORD }}"
+         KEYCLOAK_ADMIN: "{{ KEYCLOAK_ADMIN }}"
+         KEYCLOAK_ADMIN_PASSWORD: "{{ KEYCLOAK_ADMIN_PASSWORD }}"
        restart_policy: always
 
 
