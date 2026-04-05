@@ -1,0 +1,14 @@
+replicas: 3
+
+container:
+  image: aba111f/app:v6
+
+
+host: myprod.com
+
+requests: 
+  memory: "128Mi"
+  cpu: "100m"
+limits:
+  memory: "256Mi"
+  cpu: "500m"

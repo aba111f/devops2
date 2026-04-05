@@ -1,0 +1,14 @@
+replicas: 2
+
+container:
+  image: aba111f/app:v6
+
+
+host: mydev.com
+
+requests: 
+  memory: "128Mi"
+  cpu: "100m"
+limits:
+  memory: "256Mi"
+  cpu: "500m"
